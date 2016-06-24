@@ -8,8 +8,81 @@ namespace SummerSchool
 {
     class Program
     {
+        static string[] Students = new string[15];
+        static int[] Tuitions = new int[15];
+
         static void Main(string[] args)
         {
+            while (true)
+            {
+                Console.WriteLine("Welcome to the student enrollment system. Please choose from the following list of options...");
+
+                PrintMenu();
+
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    EnrollStudent();
+                }
+                else if (choice == 2)
+                {
+                    UnenrollStudent();
+                }
+                else if (choice == 3)
+                {
+                    PrintStudents();
+                }
+                else if (choice == 4)
+                {
+                    break;
+                }
+                else
+                {  
+                    Console.WriteLine("Please enter a number 1-4");
+                }
+            }
+
+            Console.ReadKey();
         }
-    }
-}
+
+        private static void PrintMenu()
+        {
+            Console.WriteLine();
+            if (CountStudents() < Students.Length)
+            {
+                Console.WriteLine("1. Enroll a student");
+            }
+            if (CountStudents() > 0)
+            {
+                Console.WriteLine("2. Unenroll a student");
+            }
+            Console.WriteLine("3. Print out the list of enrolled students");
+            Console.WriteLine("4. Exit");
+        }
+
+        private static void UnenrollStudent()
+        {
+            PrintStudents();
+
+            Console.WriteLine("Which student would you like to unenroll?");
+
+            int studentNumber = Convert.ToInt32(Console.ReadLine());
+
+            int studentIndex = studentNumber - 1;
+
+            Console.WriteLine("{0} has been unenrolled.", Students[studentIndex]);
+ 
+            Students[studentIndex] = null;
+
+        }
+
+        static int GetNextAvailableSpot()
+        {
+            for (int i = 0; i < Students.Length; i++)
+            {
+                if (Students[i] == null)
+                { 
+                    return i;
+                }
+            }
