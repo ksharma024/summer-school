@@ -133,5 +133,39 @@ namespace SummerSchool
                               student, CalculateEnrollmentCost(student));
         }
 
+        static void PrintStudents()
+        {
+            for (int i = 0; i < Students.Length; i++)
+            {
+                if (Students[i] == null)
+                {
+                  
+                    continue;
+                }
+                Console.WriteLine("{0}. {1} (£{2})", i + 1, Students[i], CalculateEnrollmentCost(Students[i]));
+            }
+        }
 
-       
+        static int CalculateEnrollmentCost(string studentName)
+        {
+
+            string[] splitNames = studentName.Split(' ');
+
+            string firstName = splitNames[0];
+            string lastName = splitNames[splitNames.Length - 1];
+
+            if (lastName.ToLower() == "potter")
+            {
+                return 100;
+            }
+            else if (lastName.ToLower() == "longbottom" && CountStudents() <= 10)
+            {
+                return 0;
+            }
+            else
+            {
+                return 200;
+            }
+        }
+    }
+}
