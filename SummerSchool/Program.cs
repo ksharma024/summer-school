@@ -86,3 +86,52 @@ namespace SummerSchool
                     return i;
                 }
             }
+            return -1;
+        }
+
+        static int CountStudents()
+        {
+            int counter = 0;
+            for (int i = 0; i < Students.Length; i++)
+            {
+                if (Students[i] != null)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        static void EnrollStudent()
+        {
+            Console.WriteLine("What's the name of the student to enroll?");
+            string student = Console.ReadLine();
+
+            string[] splitNames = student.Split(' ');
+
+            string firstName = splitNames[0];
+            string lastName = splitNames[splitNames.Length - 1];
+
+            if (lastName.ToLower() == "malfoy")
+            {
+                Console.WriteLine("Malfoys may not be admitted!");
+                return;
+            }
+            if (student.ToLower().Contains("tom") ||
+                student.ToLower().Contains("riddle") ||
+                student.ToLower().Contains("voldemort"))
+            {
+                Console.WriteLine("RED ALERT!!! HE WHO MUST NOT BE NAMED!!!");
+            }
+
+            
+            int spot = GetNextAvailableSpot();
+
+            Students[spot] = student;
+
+            Console.WriteLine("{0} is now enrolled and will need to pay £{1}.",
+                              student, CalculateEnrollmentCost(student));
+        }
+
+
+       
